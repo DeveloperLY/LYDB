@@ -7,6 +7,9 @@
 //
 
 #import "LYViewController.h"
+#import "LYSqliteTool.h"
+
+#define kCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
 @interface LYViewController ()
 
@@ -17,7 +20,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    NSLog(@"dbPath = %@", kCachePath);
+    
+    NSString *sql = @"select * from t_stu";
+    
+    NSMutableArray *result = [LYSqliteTool querySql:sql dbPath:[NSString stringWithFormat:@"%@/%@", kCachePath, @"test.db"]];
+    
+    NSLog(@"result == %@", result);
+}
+
+- (void)createTable {
+    NSLog(@"dbPath = %@", kCachePath);
+    
+    NSString *sql = @"create table if not exists t_stu(id integer primary key autoincrement, name text not null, age integer, score real)";
+    
+    
+    // 测试创建数据库
+    BOOL result = [LYSqliteTool dealSQL:sql dbPath:[NSString stringWithFormat:@"%@/%@", kCachePath, @"test.db"]];
+    
+    NSLog(@"result == %zd", result);
 }
 
 - (void)didReceiveMemoryWarning

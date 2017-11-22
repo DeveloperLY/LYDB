@@ -24,6 +24,8 @@
 		6BBAEE1B48DDE3FF98D6C491 /* Pods_LYDB_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2257121DE005C08A287210 /* Pods_LYDB_Example.framework */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		CD273D551FC55DDE005F079D /* LYSqliteTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CD273D541FC55DDE005F079D /* LYSqliteTool.m */; };
+		CD273D571FC55EFE005F079D /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD273D561FC55EFE005F079D /* libsqlite3.0.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,9 @@
 		C408DFFE7DA7F625B9A2004F /* Pods_LYDB_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LYDB_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C85AD3286D7982EB3EE349D7 /* Pods-LYDB_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LYDB_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LYDB_Tests/Pods-LYDB_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		CBA9FD1B2C7C3744D80E13B2 /* Pods-LYDB_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LYDB_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LYDB_Example/Pods-LYDB_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		CD273D531FC55DDE005F079D /* LYSqliteTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYSqliteTool.h; sourceTree = "<group>"; };
+		CD273D541FC55DDE005F079D /* LYSqliteTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYSqliteTool.m; sourceTree = "<group>"; };
+		CD273D561FC55EFE005F079D /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		E542E962B6DADA3E86DE5AA1 /* LYDB.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LYDB.podspec; path = ../LYDB.podspec; sourceTree = "<group>"; };
 		EA2257121DE005C08A287210 /* Pods_LYDB_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LYDB_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -74,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD273D571FC55EFE005F079D /* libsqlite3.0.tbd in Frameworks */,
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
@@ -119,6 +125,7 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD273D561FC55EFE005F079D /* libsqlite3.0.tbd */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
@@ -200,6 +207,8 @@
 		CD273D521FC53E24005F079D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CD273D531FC55DDE005F079D /* LYSqliteTool.h */,
+				CD273D541FC55DDE005F079D /* LYSqliteTool.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -413,6 +422,7 @@
 			files = (
 				6003F59E195388D20070C39A /* LYAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* LYViewController.m in Sources */,
+				CD273D551FC55DDE005F079D /* LYSqliteTool.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
