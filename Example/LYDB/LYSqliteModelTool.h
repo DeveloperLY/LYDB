@@ -44,4 +44,16 @@
  */
 + (BOOL)deleteModel:(Class)cls whereStr:(NSString *)whereStr dbPath:(NSString *)dbPath;
 
+/**
+ * 查询所有模型
+ */
++ (NSArray *)queryAllModels:(Class)cls dbPath:(NSString *)dbPath;
+
+/** 根据条件来查询
+ * eg:
+ * age > 19
+ * score <= 10
+ */
++ (NSArray *)queryModels:(Class)cls withSql:(NSString *)sql dbPath:(NSString *)dbPath;
+
 @end

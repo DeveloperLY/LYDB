@@ -27,15 +27,21 @@
     
     NSString *dbName = [NSString stringWithFormat:@"%@/%@", kCachePath, @"test.sqlite"];
     
+    NSArray *result = [LYSqliteModelTool queryAllModels:[LYStudent class] dbPath:dbName];
+    
+    NSLog(@"result == %@", result);
+}
+
+- (void)saveOrUpdateModel:(NSString *)dbName {
     LYStudent *stu = [[LYStudent alloc] init];
-    stu.stuNum = 1;
-    stu.name = @"张三";
-    stu.age = 18;
-    stu.score = 88.5;
+    stu.stuNum = 2;
+    stu.name = @"李四";
+    stu.age = 28;
+    stu.score = 75.5;
     
-//    BOOL result = [LYSqliteModelTool saveOrUpdateModel:stu dbPath:dbName];
+    BOOL result = [LYSqliteModelTool saveOrUpdateModel:stu dbPath:dbName];
     
-    BOOL result = [LYSqliteModelTool deleteModel:stu dbPath:dbName];
+//    BOOL result = [LYSqliteModelTool deleteModel:stu dbPath:dbName];
     
     NSLog(@"result == %zd", result);
 }

@@ -182,4 +182,31 @@
     return [LYSqliteTool dealSQL:deleteSql dbPath:dbPath];
 }
 
++ (NSArray *)queryAllModels:(Class)cls dbPath:(NSString *)dbPath {
+    NSString *tableName = [LYModelTool tableName:cls];
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from %@", tableName];
+    
+    NSArray <NSDictionary *>*results = [LYSqliteTool querySql:sql dbPath:dbPath];
+    
+    return [self parseResults:results withClass:cls];
+}
+
++ (NSArray *)queryModels:(Class)cls withSql:(NSString *)sql dbPath:(NSString *)dbPath {
+    NSArray <NSDictionary *>*results = [LYSqliteTool querySql:sql dbPath:dbPath];
+
+    return [self parseResults:results withClass:cls];
+}
+
+#pragma mark - Private Method
++ (NSArray *)parseResults:(NSArray <NSDictionary *>*)results withClass:(Class)cls {
+    NSMutableArray *models = [NSMutableArray array];
+    for (NSDictionary *modelDic in results) {
+        id model = [[cls alloc] init];
+        [models addObject:model];
+        [model setValuesForKeysWithDictionary:modelDic];
+    }
+    return models;
+}
+
 @end
