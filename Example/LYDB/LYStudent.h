@@ -17,4 +17,7 @@
 @property (nonatomic, assign) CGFloat score;
 @property (nonatomic, copy) NSString *address;
 
+@property (nonatomic, strong) NSMutableArray *mArray;
+@property (nonatomic, strong) NSDictionary *dict;
+
 @end

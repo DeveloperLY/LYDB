@@ -27,6 +27,8 @@
     
     NSString *dbName = [NSString stringWithFormat:@"%@/%@", kCachePath, @"test.sqlite"];
     
+    [self saveOrUpdateModel:dbName];
+    
     NSArray *result = [LYSqliteModelTool queryAllModels:[LYStudent class] dbPath:dbName];
     
     NSLog(@"result == %@", result);
@@ -34,10 +36,13 @@
 
 - (void)saveOrUpdateModel:(NSString *)dbName {
     LYStudent *stu = [[LYStudent alloc] init];
-    stu.stuNum = 2;
-    stu.name = @"李四";
-    stu.age = 28;
-    stu.score = 75.5;
+    stu.stuNum = 3;
+    stu.name = @"李四3";
+    stu.age = 3;
+    stu.score = 733.5;
+    stu.mArray = [@[@"dd", @"ddd"] mutableCopy];
+    stu.dict = @{@"a" : @"b"};
+    
     
     BOOL result = [LYSqliteModelTool saveOrUpdateModel:stu dbPath:dbName];
     

@@ -105,7 +105,9 @@
     
     // 检查表结构是否需要更新
     if ([self isTableRequiredUpdate:cls dbPath:dbPath]) {
-        [self updateTable:cls dbPath:dbPath];
+        if (![self updateTable:cls dbPath:dbPath]) {
+            return NO;
+        }
     }
     
     // 表名
@@ -129,6 +131,13 @@
     NSMutableArray *values = [NSMutableArray array];
     for (NSString *columnName in columnNames) {
         id value = [model valueForKeyPath:columnName];
+        
+        // 处理数组或字典
+        if ([value isKindOfClass:[NSArray class]] || [value isKindOfClass:[NSDictionary class]]) {
+            NSData *data = [NSJSONSerialization dataWithJSONObject:value options:NSJSONWritingPrettyPrinted error:nil];
+            value = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        }
+        
         [values addObject:value];
     }
     
@@ -201,10 +210,27 @@
 #pragma mark - Private Method
 + (NSArray *)parseResults:(NSArray <NSDictionary *>*)results withClass:(Class)cls {
     NSMutableArray *models = [NSMutableArray array];
+    
+    NSDictionary *nameTypeDict = [LYModelTool classIvarNameTypeDic:cls];
+    
     for (NSDictionary *modelDic in results) {
         id model = [[cls alloc] init];
         [models addObject:model];
-        [model setValuesForKeysWithDictionary:modelDic];
+        
+        [modelDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            NSString *type = nameTypeDict[key];
+            id resultValue = obj;
+            
+            if ([type isEqualToString:@"NSArray"] || [type isEqualToString:@"NSDictionary"]) {
+                NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
+                resultValue = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            } else if ([type isEqualToString:@"NSMutableArray"] || [type isEqualToString:@"NSMutableDictionary"]) {
+                NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
+                resultValue = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            }
+
+            [model setValue:resultValue forKeyPath:key];
+        }];
     }
     return models;
 }
