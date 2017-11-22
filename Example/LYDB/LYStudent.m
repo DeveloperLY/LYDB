@@ -15,7 +15,7 @@
 }
 
 + (NSArray *)ignoreColumnNames {
-    return @[@"score"];
+    return @[@"address"];
 }
 
 + (NSDictionary *)newOldPropertyMapper {

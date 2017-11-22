@@ -25,15 +25,23 @@
     
     NSLog(@"dbPath = %@", kCachePath);
     
-    NSString *dbName = [NSString stringWithFormat:@"%@/%@", kCachePath, @"test.db"];
+    NSString *dbName = [NSString stringWithFormat:@"%@/%@", kCachePath, @"test.sqlite"];
     
-    BOOL isUpdate = [LYSqliteModelTool isTableRequiredUpdate:[LYStudent class] dbPath:dbName];
+    LYStudent *stu = [[LYStudent alloc] init];
+    stu.stuNum = 1;
+    stu.name = @"张三";
+    stu.age = 18;
+    stu.score = 88.5;
     
-    if (isUpdate) {
-        BOOL result = [LYSqliteModelTool updateTable:[LYStudent class] dbPath:dbName];
-        
-        NSLog(@"result == %zd", result);
-    }
+    BOOL result = [LYSqliteModelTool saveOrUpdateModel:stu dbPath:dbName];
+    
+    NSLog(@"result == %zd", result);
+}
+
+- (void)dynamicUpdateTable:(NSString *)dbName {
+    BOOL result = [LYSqliteModelTool createTable:[LYStudent class] dbPath:dbName];
+    
+    NSLog(@"result == %zd", result);
 }
 
 - (void)dynamicCreateTable:(NSString *)dbName {

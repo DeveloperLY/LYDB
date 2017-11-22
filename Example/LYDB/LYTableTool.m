@@ -50,4 +50,14 @@
     return names;
 }
 
++ (BOOL)isTableExists:(Class)cls dbPath:(NSString *)dbPath {
+    NSString *tableName = [LYModelTool tableName:cls];
+    
+    NSString *queryCreateSqlStr = [NSString stringWithFormat:@"select sql from sqlite_master where type = 'table' and name = '%@'", tableName];
+    
+    NSMutableArray *result = [LYSqliteTool querySql:queryCreateSqlStr dbPath:dbPath];
+    
+    return result.count > 0;
+}
+
 @end

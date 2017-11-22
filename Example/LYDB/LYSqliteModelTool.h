@@ -26,4 +26,10 @@
  */
 + (BOOL)updateTable:(Class)cls dbPath:(NSString *)dbPath;
 
+
+/**
+ * 保存或更新模型
+ */
++ (BOOL)saveOrUpdateModel:(id)model dbPath:(NSString *)dbPath;
+
 @end

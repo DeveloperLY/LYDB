@@ -15,4 +15,9 @@
  */
 + (NSArray *)tableSortedColumnNames:(Class)cls dbPath:(NSString *)dbPath;
 
+/**
+ * 判断表是否存在
+ */
++ (BOOL)isTableExists:(Class)cls dbPath:(NSString *)dbPath;
+
 @end

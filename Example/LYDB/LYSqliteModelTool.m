@@ -95,4 +95,63 @@
     return [LYSqliteTool dealSQLs:execSqls dbPath:dbPath];
 }
 
++ (BOOL)saveOrUpdateModel:(id)model dbPath:(NSString *)dbPath {
+    Class cls = [model class];
+    
+    // 判断表表是否存在
+    if (![LYTableTool isTableExists:cls dbPath:dbPath]) {
+        [self createTable:cls dbPath:dbPath];
+    }
+    
+    // 检查表结构是否需要更新
+    if ([self isTableRequiredUpdate:cls dbPath:dbPath]) {
+        [self updateTable:cls dbPath:dbPath];
+    }
+    
+    // 表名
+    NSString *tableName = [LYModelTool tableName:cls];
+    
+    if (![cls respondsToSelector:@selector(primaryKey)]) {
+        // 抛异常
+        NSException *excp = [NSException exceptionWithName:@"LYDBException" reason:@"如果需要操作这个模型，必须先实现协议方法+ (NSString *)primaryKey, 配置主键信息。" userInfo:nil];
+        [excp raise];
+    }
+    NSString *primaryKey = [cls primaryKey];
+    id primaryValue = [model valueForKeyPath:primaryKey];
+    
+    NSString *checkSql = [NSString stringWithFormat:@"select * from %@ where %@ = '%@'", tableName, primaryKey, primaryValue];
+    NSArray *result = [LYSqliteTool querySql:checkSql dbPath:dbPath];
+    
+    // 获取字段数组
+    NSArray *columnNames = [LYModelTool classIvarNameTypeDic:cls].allKeys;
+    
+    // 获取字段值数组
+    NSMutableArray *values = [NSMutableArray array];
+    for (NSString *columnName in columnNames) {
+        id value = [model valueForKeyPath:columnName];
+        [values addObject:value];
+    }
+    
+    // 拼接字段
+    NSMutableArray *setValueArray = [NSMutableArray array];
+    NSInteger count = columnNames.count;
+    for (int i = 0; i < count; i++) {
+        NSString *name = columnNames[i];
+        id value = values[i];
+        NSString *setStr = [NSString stringWithFormat:@"%@ ='%@'", name, value];
+        [setValueArray addObject:setStr];
+    }
+    
+    // 拼接对应的SQL语句
+    NSString *execSql = @"";
+    if (result.count > 0) {
+        execSql = [NSString stringWithFormat:@"update %@ set %@  where %@ = '%@'", tableName, [setValueArray componentsJoinedByString:@","], primaryKey, primaryValue];
+    } else {
+        execSql = [NSString stringWithFormat:@"insert into %@(%@) values('%@')", tableName, [columnNames componentsJoinedByString:@","], [values componentsJoinedByString:@"','"]];
+    }
+    
+    // 执行SQL语句
+    return [LYSqliteTool dealSQL:execSql dbPath:dbPath];
+}
+
 @end
