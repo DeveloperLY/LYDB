@@ -27,9 +27,13 @@
     
     NSString *dbName = [NSString stringWithFormat:@"%@/%@", kCachePath, @"test.db"];
     
-    BOOL result = [LYSqliteModelTool isTableRequiredUpdate:[LYStudent class] dbPath:dbName];
+    BOOL isUpdate = [LYSqliteModelTool isTableRequiredUpdate:[LYStudent class] dbPath:dbName];
     
-    NSLog(@"result == %zd", result);
+    if (isUpdate) {
+        BOOL result = [LYSqliteModelTool updateTable:[LYStudent class] dbPath:dbName];
+        
+        NSLog(@"result == %zd", result);
+    }
 }
 
 - (void)dynamicCreateTable:(NSString *)dbName {

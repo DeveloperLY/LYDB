@@ -21,4 +21,9 @@
  */
 + (BOOL)isTableRequiredUpdate:(Class)cls dbPath:(NSString *)dbPath;
 
+/**
+ * 动态更新表结构
+ */
++ (BOOL)updateTable:(Class)cls dbPath:(NSString *)dbPath;
+
 @end

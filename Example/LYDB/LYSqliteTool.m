@@ -87,6 +87,33 @@ sqlite3 *ppDb = nil;
     return rowDictArray;
 }
 
++ (BOOL)dealSQLs:(NSArray<NSString *> *)sqls dbPath:(NSString *)dbPath {
+    [self beginTransaction:dbPath];
+    
+    for (NSString *sql in sqls) {
+        BOOL result = [self dealSQL:sql dbPath:dbPath];
+        if (result == NO) {
+            [self rollBackTransaction:dbPath];
+            return NO;
+        }
+    }
+    
+    [self commitTransaction:dbPath];
+    return YES;
+}
+
+#pragma mark - 事务
++ (void)beginTransaction:(NSString *)dbPath {
+    [self dealSQL:@"begin transaction" dbPath:dbPath];
+}
+
++ (void)commitTransaction:(NSString *)dbPath {
+    [self dealSQL:@"commit transaction" dbPath:dbPath];
+}
++ (void)rollBackTransaction:(NSString *)dbPath {
+    [self dealSQL:@"rollback transaction" dbPath:dbPath];
+}
+
 #pragma mark - Private Method
 + (BOOL)openDB:(NSString *)dbPath {
     if (dbPath == nil) {

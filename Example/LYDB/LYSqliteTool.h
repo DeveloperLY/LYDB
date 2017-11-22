@@ -20,4 +20,9 @@
  */
 + (NSMutableArray <NSMutableDictionary *>*)querySql:(NSString *)sql dbPath:(NSString *)dbPath;
 
+/**
+ *  执行多条Sql语句
+ */
++ (BOOL)dealSQLs:(NSArray <NSString *>*)sqls dbPath:(NSString *)dbPath;
+
 @end
