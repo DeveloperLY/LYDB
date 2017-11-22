@@ -8,6 +8,8 @@
 
 #import "LYViewController.h"
 #import "LYSqliteTool.h"
+#import "LYSqliteModelTool.h"
+#import "LYStudent.h"
 
 #define kCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
@@ -23,6 +25,14 @@
     
     NSLog(@"dbPath = %@", kCachePath);
     
+    NSString *dbName = [NSString stringWithFormat:@"%@/%@", kCachePath, @"test.db"];
+    
+    BOOL result = [LYSqliteModelTool createTable:[LYStudent class] dbPath:dbName];
+    
+    NSLog(@"result == %zd", result);
+}
+
+- (void)testQuery {
     NSString *sql = @"select * from t_stu";
     
     NSMutableArray *result = [LYSqliteTool querySql:sql dbPath:[NSString stringWithFormat:@"%@/%@", kCachePath, @"test.db"]];
