@@ -1,0 +1,6 @@
+framework module LYDB {
+  umbrella header "LYDB-umbrella.h"
+
+  export *
+  module * { export * }
+}

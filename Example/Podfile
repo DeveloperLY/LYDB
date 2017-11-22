@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'LYDB_Example' do
+  pod 'LYDB', :path => '../'
+
+  target 'LYDB_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
