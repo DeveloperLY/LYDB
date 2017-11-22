@@ -14,4 +14,8 @@
     return @"stuNum";
 }
 
++ (NSArray *)ignoreColumnNames {
+    return @[@"score"];
+}
+
 @end

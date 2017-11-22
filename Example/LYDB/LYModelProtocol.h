@@ -13,7 +13,11 @@
 
 @protocol LYModelProtocol <NSObject>
 
+@required
 + (NSString *)primaryKey;
+
+@optional
++ (NSArray *)ignoreColumnNames;
 
 @end
 

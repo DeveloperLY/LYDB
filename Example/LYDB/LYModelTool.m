@@ -8,6 +8,7 @@
 
 #import "LYModelTool.h"
 #import <objc/message.h>
+#import "LYModelProtocol.h"
 
 @implementation LYModelTool
 
@@ -19,6 +20,12 @@
     unsigned int outCount = 0;
     Ivar *varList = class_copyIvarList(cls, &outCount);
     
+    // 忽略字段
+    NSArray *ignoreNames = nil;
+    if ([cls respondsToSelector:@selector(ignoreColumnNames)]) {
+        ignoreNames = [cls ignoreColumnNames];
+    }
+    
     NSMutableDictionary *nameTypeDict = [NSMutableDictionary dictionary];
     for (int i = 0; i < outCount; i++) {
         Ivar ivar = varList[i];
@@ -27,6 +34,10 @@
         NSString *ivarName = [NSString stringWithUTF8String:ivar_getName(ivar)];
         if ([ivarName hasPrefix:@"_"]) {
             ivarName = [ivarName substringFromIndex:1];
+        }
+        
+        if ([ignoreNames containsObject:ivarName]) {
+            continue;
         }
         
         // 成员变量类型
