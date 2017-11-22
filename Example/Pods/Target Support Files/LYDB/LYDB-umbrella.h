@@ -10,6 +10,11 @@
 #endif
 #endif
 
+#import "LYModelProtocol.h"
+#import "LYModelTool.h"
+#import "LYSqliteModelTool.h"
+#import "LYSqliteTool.h"
+#import "LYTableTool.h"
 
 FOUNDATION_EXPORT double LYDBVersionNumber;
 FOUNDATION_EXPORT const unsigned char LYDBVersionString[];
