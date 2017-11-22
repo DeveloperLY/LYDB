@@ -33,7 +33,9 @@
     stu.age = 18;
     stu.score = 88.5;
     
-    BOOL result = [LYSqliteModelTool saveOrUpdateModel:stu dbPath:dbName];
+//    BOOL result = [LYSqliteModelTool saveOrUpdateModel:stu dbPath:dbName];
+    
+    BOOL result = [LYSqliteModelTool deleteModel:stu dbPath:dbName];
     
     NSLog(@"result == %zd", result);
 }

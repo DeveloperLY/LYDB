@@ -154,4 +154,32 @@
     return [LYSqliteTool dealSQL:execSql dbPath:dbPath];
 }
 
++ (BOOL)deleteModel:(id)model dbPath:(NSString *)dbPath {
+    Class cls = [model class];
+    NSString *tableName = [LYModelTool tableName:cls];
+    
+    if (![cls respondsToSelector:@selector(primaryKey)]) {
+        // 抛异常
+        NSException *excp = [NSException exceptionWithName:@"LYDBException" reason:@"如果需要操作这个模型，必须先实现协议方法+ (NSString *)primaryKey, 配置主键信息。" userInfo:nil];
+        [excp raise];
+    }
+    
+    NSString *primaryKey = [cls primaryKey];
+    id primaryValue = [model valueForKeyPath:primaryKey];
+    NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where %@ = '%@'", tableName, primaryKey, primaryValue];
+    
+    return [LYSqliteTool dealSQL:deleteSql dbPath:dbPath];
+}
+
++ (BOOL)deleteModel:(Class)cls whereStr:(NSString *)whereStr dbPath:(NSString *)dbPath {
+    NSString *tableName = [LYModelTool tableName:cls];
+    
+    NSString *deleteSql = [NSString stringWithFormat:@"delete from %@", tableName];
+    if (whereStr.length > 0) {
+        deleteSql = [deleteSql stringByAppendingFormat:@" where %@", whereStr];
+    }
+    
+    return [LYSqliteTool dealSQL:deleteSql dbPath:dbPath];
+}
+
 @end

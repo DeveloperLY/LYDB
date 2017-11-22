@@ -32,4 +32,16 @@
  */
 + (BOOL)saveOrUpdateModel:(id)model dbPath:(NSString *)dbPath;
 
+/**
+ * 删除模型
+ */
++ (BOOL)deleteModel:(id)model dbPath:(NSString *)dbPath;
+
+/** 根据条件来删除
+ * eg:
+ * age > 19
+ * score <= 10
+ */
++ (BOOL)deleteModel:(Class)cls whereStr:(NSString *)whereStr dbPath:(NSString *)dbPath;
+
 @end
