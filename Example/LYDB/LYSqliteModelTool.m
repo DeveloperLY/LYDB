@@ -9,6 +9,7 @@
 #import "LYSqliteModelTool.h"
 #import "LYModelTool.h"
 #import "LYSqliteTool.h"
+#import "LYTableTool.h"
 
 @implementation LYSqliteModelTool
 
@@ -30,6 +31,12 @@
     
     // 执行语句
     return [LYSqliteTool dealSQL:createTableSql dbPath:dbPath];
+}
+
++ (BOOL)isTableRequiredUpdate:(Class)cls dbPath:(NSString *)dbPath {
+    NSArray *modelNames = [LYModelTool allTableSortedIvarNames:cls];
+    NSArray *tableNames = [LYTableTool tableSortedColumnNames:cls dbPath:dbPath];
+    return ![modelNames isEqualToArray:tableNames];
 }
 
 @end

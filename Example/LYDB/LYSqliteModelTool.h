@@ -16,4 +16,9 @@
  */
 + (BOOL)createTable:(Class)cls dbPath:(NSString *)dbPath;
 
+/**
+ * 否需要跟新数据库表结构
+ */
++ (BOOL)isTableRequiredUpdate:(Class)cls dbPath:(NSString *)dbPath;
+
 @end

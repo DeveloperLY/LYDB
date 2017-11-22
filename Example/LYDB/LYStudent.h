@@ -15,5 +15,6 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSUInteger age;
 @property (nonatomic, assign) CGFloat score;
+@property (nonatomic, copy) NSString *address;
 
 @end

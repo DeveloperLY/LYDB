@@ -29,6 +29,7 @@
 		CD273D5A1FC569E1005F079D /* LYStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = CD273D591FC569E1005F079D /* LYStudent.m */; };
 		CD273D5D1FC56A3F005F079D /* LYSqliteModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CD273D5C1FC56A3F005F079D /* LYSqliteModelTool.m */; };
 		CD273D601FC56AD0005F079D /* LYModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CD273D5F1FC56AD0005F079D /* LYModelTool.m */; };
+		CD273D641FC57934005F079D /* LYTableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CD273D631FC57934005F079D /* LYTableTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		CD273D5E1FC56AD0005F079D /* LYModelTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYModelTool.h; sourceTree = "<group>"; };
 		CD273D5F1FC56AD0005F079D /* LYModelTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYModelTool.m; sourceTree = "<group>"; };
 		CD273D611FC56F7F005F079D /* LYModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYModelProtocol.h; sourceTree = "<group>"; };
+		CD273D621FC57934005F079D /* LYTableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYTableTool.h; sourceTree = "<group>"; };
+		CD273D631FC57934005F079D /* LYTableTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYTableTool.m; sourceTree = "<group>"; };
 		E542E962B6DADA3E86DE5AA1 /* LYDB.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LYDB.podspec; path = ../LYDB.podspec; sourceTree = "<group>"; };
 		EA2257121DE005C08A287210 /* Pods_LYDB_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LYDB_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -226,6 +229,8 @@
 				CD273D5E1FC56AD0005F079D /* LYModelTool.h */,
 				CD273D5F1FC56AD0005F079D /* LYModelTool.m */,
 				CD273D611FC56F7F005F079D /* LYModelProtocol.h */,
+				CD273D621FC57934005F079D /* LYTableTool.h */,
+				CD273D631FC57934005F079D /* LYTableTool.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -440,6 +445,7 @@
 				CD273D5A1FC569E1005F079D /* LYStudent.m in Sources */,
 				6003F59E195388D20070C39A /* LYAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* LYViewController.m in Sources */,
+				CD273D641FC57934005F079D /* LYTableTool.m in Sources */,
 				CD273D551FC55DDE005F079D /* LYSqliteTool.m in Sources */,
 				CD273D5D1FC56A3F005F079D /* LYSqliteModelTool.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

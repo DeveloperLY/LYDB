@@ -30,4 +30,9 @@
  */
 + (NSString *)columnNamesAndTypesStr:(Class)cls;
 
+/**
+ * 所有需要映射到表的字段
+ */
++ (NSArray *)allTableSortedIvarNames:(Class)cls;
+
 @end
