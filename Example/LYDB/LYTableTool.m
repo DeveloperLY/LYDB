@@ -34,7 +34,7 @@
     
     NSMutableArray *names = [NSMutableArray array];
     for (NSString *nameType in nameTypeArray) {
-        if ([nameType containsString:@"primary"]) {
+        if ([[nameType lowercaseString] containsString:@"primary"]) {
             continue;
         }
         NSString *nameType2 = [nameType stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
