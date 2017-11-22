@@ -102,7 +102,7 @@ sqlite3 *ppDb = nil;
     return YES;
 }
 
-#pragma mark - 事务
+#pragma mark - Private Method
 + (void)beginTransaction:(NSString *)dbPath {
     [self dealSQL:@"begin transaction" dbPath:dbPath];
 }
@@ -114,7 +114,6 @@ sqlite3 *ppDb = nil;
     [self dealSQL:@"rollback transaction" dbPath:dbPath];
 }
 
-#pragma mark - Private Method
 + (BOOL)openDB:(NSString *)dbPath {
     if (dbPath == nil) {
         return NO;

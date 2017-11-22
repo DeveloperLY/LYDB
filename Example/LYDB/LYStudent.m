@@ -18,4 +18,8 @@
     return @[@"score"];
 }
 
++ (NSDictionary *)newOldPropertyMapper {
+    return @{@"age" : @"age2"};
+}
+
 @end

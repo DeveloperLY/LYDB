@@ -65,11 +65,24 @@
     NSArray *oldNames = [LYTableTool tableSortedColumnNames:cls dbPath:dbPath];
     NSArray *newNames = [LYModelTool allTableSortedIvarNames:cls];
     
+    // 获取新旧字段映射关系
+    NSDictionary *newOldPropertyMapper = @{};
+    if ([cls respondsToSelector:@selector(newOldPropertyMapper)]) {
+        newOldPropertyMapper = [cls newOldPropertyMapper];
+    }
+    
     for (NSString *columnName in newNames) {
-        if (![oldNames containsObject:columnName]) {
+        NSString *oldName = columnName;
+        // 获取新字段映射的旧字段名
+        if ([newOldPropertyMapper[columnName] length] != 0) {
+            oldName = newOldPropertyMapper[columnName];
+        }
+        
+        if ((![oldNames containsObject:columnName] && ![oldNames containsObject:oldName]) || [columnName isEqualToString:primaryKey]) {
             continue;
         }
-        NSString *updateSql = [NSString stringWithFormat:@"update %@ set %@ = (select %@ from %@ where %@.%@ = %@.%@)", tmpTableName, columnName, columnName, tableName, tmpTableName, primaryKey, tableName, primaryKey];
+        
+        NSString *updateSql = [NSString stringWithFormat:@"update %@ set %@ = (select %@ from %@ where %@.%@ = %@.%@)", tmpTableName, columnName, oldName, tableName, tmpTableName, primaryKey, tableName, primaryKey];
         [execSqls addObject:updateSql];
     }
     
